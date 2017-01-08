@@ -1,3 +1,11 @@
 export GOPATH=$GOPATH:/home/pprofessi/projects/tarantula
 export PATH=$PATH:/home/pprofessi/projects/tarantula/bin
 python -m SimpleHTTPServer 8000
+
+mysql -u root -p
+Papro040591!
+
+
+systemctl stop mysqld.service 
+systemctl start mysqld.service
+
