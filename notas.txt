@@ -9,3 +9,9 @@ Papro040591!
 systemctl stop mysqld.service 
 systemctl start mysqld.service
 
+"jugos_nutritivos_naturales"
+"buscar_jugos"
+"recetas_jugos_de_vegetales"
+"jugos_de_frutas_para_adelgazar"
+
+

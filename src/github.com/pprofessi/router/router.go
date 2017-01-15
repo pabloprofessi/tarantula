@@ -2,16 +2,9 @@ package router
 
 import (
 	"fmt"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/pprofessi/response_writer"
 	"net/http"
 )
-
-type RoutableKeyWord struct {
-	gorm.Model
-	KeyWord string
-}
 
 func Router(w http.ResponseWriter, r *http.Request) {
 
@@ -25,14 +18,12 @@ func Router(w http.ResponseWriter, r *http.Request) {
 func check_path(url_path string) string {
 
 	var routable string = ""
-	db, err := gorm.Open("mysql", "tarantula:tarantula@tcp(db:3306)/tarantula")
-	if err != nil {
-		fmt.Println(err)
-		panic("failed to connect database")
-	}
-	db.AutoMigrate(&RoutableKeyWord{})
-	//db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&RoutableKeyWord{})
-	db.Create(&RoutableKeyWord{KeyWord: url_path})
-
+	db := get_db()
+	//db.Create(&RoutableKeyWord{KeyWord: url_path[1:]})
+	var rkw RoutableKeyWord
+	//db.Where("key_word = ?", url_path[1:]).First(&rkw)
+	db.First(&rkw)
+	fmt.Println(rkw)
+	fmt.Println(rkw.KeyWord)
 	return routable
 }
