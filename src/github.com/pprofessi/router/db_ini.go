@@ -8,7 +8,8 @@ import (
 
 type RoutableKeyWord struct {
 	gorm.Model
-	KeyWord string
+	KeyWord            string
+	DestinyRouteString string
 }
 
 var kwdb *gorm.DB = nil
@@ -20,14 +21,13 @@ func db_init() {
 		fmt.Println(err)
 		panic("failed to connect database")
 	}
-	//crear func para migraciones
 	kwdb.AutoMigrate(&RoutableKeyWord{})
 }
 
 func get_db() *gorm.DB {
 	if kwdb == nil {
 		db_init()
-		fmt.Println("no tenia db pero ahora si")
+		fmt.Println("gorm DB initialized")
 	}
 	return kwdb
 }

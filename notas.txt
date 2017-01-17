@@ -2,9 +2,7 @@ export GOPATH=$GOPATH:/home/pprofessi/projects/tarantula
 export PATH=$PATH:/home/pprofessi/projects/tarantula/bin
 python -m SimpleHTTPServer 8000
 
-mysql -u root -p
-Papro040591!
-
+mysql -u tarantula -h 172.17.0.2 -p
 
 systemctl stop mysqld.service 
 systemctl start mysqld.service
@@ -15,3 +13,12 @@ systemctl start mysqld.service
 "jugos_de_frutas_para_adelgazar"
 
 
+ORM
+-----
+db.Create(&RoutableKeyWord{KeyWord: url_path[1:]})
+db.Where("key_word = ?", url_path[1:]).First(&rkw)
+db.First(&rkw)
+db.AutoMigrate(&RoutableKeyWord{})
+
+
+"http://localhost:9900/ok"

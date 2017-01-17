@@ -8,9 +8,9 @@ RUN wget https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz
 RUN tar -C /usr/local -xzf go1.7.4.linux-amd64.tar.gz
 
 # Set environment variables.
-ENV PATH $PATH:/usr/local/go/bin
+ENV PATH $PATH:/usr/local/go/bin:/app/tarantula/bin
 ENV GOPATH /app/tarantula
-ENV PATH $PATH:/app/tarantula/bin
+ENV TARANTULA_CONF /app/tarantula/tarantula_config_toml.conf
 
 COPY . /app/tarantula
 
