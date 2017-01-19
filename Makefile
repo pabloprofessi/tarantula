@@ -16,3 +16,6 @@ stop:
 init:
 	export GOPATH=$GOPATH:/home/pprofessi/projects/tarantula
 	docker-compose up -d db
+
+bash:
+	docker exec -ti tarantula_tarantula_1 bash

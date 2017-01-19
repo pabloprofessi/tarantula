@@ -11,18 +11,25 @@ import (
 var tr = &http.Transport{}
 var client = &http.Client{Transport: tr}
 
-func ClientBackendRequester(r *http.Request, destinyRouteString string) http.ResponseWriter {
-	var w http.ResponseWriter
-	backend_server_url, _ := url.Parse(destinyRouteString)
-
-	r.Host = config.Config.ProxyDNS //deberia el DNS del proxy
-	r.RequestURI = "*"              //no se si esto va a molestar
-	r.URL = backend_server_url
+func ClientBackendRequester(w http.ResponseWriter, r *http.Request, destinyRouteString string) {
 	//TODO: cachiar el error
-	res, err := client.Do(r)
+	destinyRouteStringParsed, err := url.Parse(destinyRouteString)
+	r.URL = destinyRouteStringParsed
 	if err != nil {
 		fmt.Println(err)
-		panic("failed to send request to BE")
+		fmt.Println("failed parse destinyRouteString")
+	}
+
+	r.Host = config.Config.ProxyDNS //deberia el DNS del proxy
+	fmt.Println(" ---- r.URL --->> ", r.URL)
+	r.RequestURI = ""
+	r.Host = config.Config.ProxyDNS
+
+	res, err := client.Do(r)
+	//fmt.Printf("%#v\n", res)
+	if err != nil {
+		fmt.Println(err)
+		fmt.Println("failed to send request to BE")
 	}
 	defer res.Body.Close()
 	for k, v := range res.Header {
@@ -30,5 +37,5 @@ func ClientBackendRequester(r *http.Request, destinyRouteString string) http.Res
 	}
 	w.WriteHeader(res.StatusCode)
 	io.Copy(w, res.Body)
-	return w
+	return
 }

@@ -8,21 +8,18 @@ import (
 )
 
 func Router(w http.ResponseWriter, r *http.Request) {
-
-	var destinyRouteString string
-	destinyRouteString = redirectable(r.URL.Path[1:])
-	if destinyRouteString != "" {
-		w = client.ClientBackendRequester(r, destinyRouteString)
+	rkw := redirectable(r.URL.Path[1:])
+	if rkw.KeyWord != "" {
+		client.ClientBackendRequester(w, r, rkw.DestinyRouteString)
 	}
-	response_writer.Response_writer(w, destinyRouteString)
+	response_writer.Response_writer(w, rkw.DestinyRouteString)
 
 }
 
-func redirectable(url_path string) string {
-
+func redirectable(url_path string) RoutableKeyWord {
 	var rkw RoutableKeyWord
 	db := get_db()
 	db.Where("key_word = ?", url_path).First(&rkw)
 	fmt.Println(rkw.KeyWord)
-	return rkw.KeyWord
+	return rkw
 }
