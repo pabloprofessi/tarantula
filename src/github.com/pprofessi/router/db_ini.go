@@ -1,9 +1,9 @@
 package router
 
 import (
-	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/pprofessi/config"
 )
 
 type RoutableKeyWord struct {
@@ -16,18 +16,18 @@ var kwdb *gorm.DB = nil
 
 func db_init() {
 	var err error
-	kwdb, err = gorm.Open("mysql", "tarantula:tarantula@tcp(db:3306)/tarantula?parseTime=true")
+	kwdb, err = gorm.Open("mysql", config.Config.DbConectionString)
 	if err != nil {
-		fmt.Println(err)
-		panic("failed to connect database")
+		config.LOG.Errorf("Failed to connect to database, err: %s", err)
 	}
+
 	kwdb.AutoMigrate(&RoutableKeyWord{})
 }
 
 func get_db() *gorm.DB {
 	if kwdb == nil {
 		db_init()
-		fmt.Println("gorm DB initialized")
+		config.LOG.Debugf("Gorm DB initialized!")
 	}
 	return kwdb
 }

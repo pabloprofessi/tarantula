@@ -7,19 +7,21 @@ import (
 )
 
 type ConfigType struct {
-	PathToRedirect string
-	ProxyDNS       string
+	ProxyDNS          string
+	LogOutputPath     string
+	LogLevel          string
+	LogFormat         string
+	DbConectionString string
 }
 
 var Config ConfigType
 
 func init() {
-
-	//setar con variable de entorno
 	if _, err := toml.DecodeFile(os.Getenv("TARANTULA_CONF"), &Config); err != nil {
 		fmt.Println(err)
 		return
 	}
+	Set_logger()
 
 	return
 }
