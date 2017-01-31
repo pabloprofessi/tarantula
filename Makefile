@@ -20,3 +20,7 @@ init:
 
 bash:
 	docker exec -ti tarantula_tarantula_1 bash
+
+db:
+	mysql -u tarantula -h 172.17.0.2 -p tarantula
+
