@@ -16,7 +16,7 @@ stop:
 init:
 	#export GOPATH=$GOPATH:/home/pprofessi/projects/tarantula
 	docker-compose up -d db
-	docker-compose up -d pyserver
+	docker-compose up -d memcached
 
 bash:
 	docker exec -ti tarantula_tarantula_1 bash

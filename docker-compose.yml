@@ -7,14 +7,14 @@ tarantula:
     - ./:/app/tarantula
   links:
     - db:db
-    - pyserver:pyserver
+    - memcached:memcached
   environment:
     TARANTULA_CONF: /app/tarantula/tarantula_config_toml.conf
 
-pyserver:
-  image: pyserver
-  ports:
-    - "9900:9900"
+#pyserver:
+#  image: pyserver
+#  ports:
+#    - "9900:9900"
 
 db:
   image: mysql:5.7
@@ -25,3 +25,7 @@ db:
     MYSQL_PASSWORD: tarantula
   volumes:
     - ./:/app/
+
+memcached:
+  image: memcached
+

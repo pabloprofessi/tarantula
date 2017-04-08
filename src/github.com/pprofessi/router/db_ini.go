@@ -6,10 +6,18 @@ import (
 	"github.com/pprofessi/config"
 )
 
-type RoutableKeyWord struct {
+type RouteToKeyWord struct {
 	gorm.Model
-	KeyWord            string
-	DestinyRouteString string
+	KeyWord         string
+	DestinyRouteUri string
+}
+
+type RouteToHost struct {
+	gorm.Model
+	SourceScheme  string
+	SourceHost    string
+	DestinyScheme string
+	DestinyHost   string
 }
 
 var kwdb *gorm.DB = nil
@@ -21,7 +29,8 @@ func db_init() {
 		config.LOG.Errorf("Failed to connect to database, err: %s", err)
 	}
 
-	kwdb.AutoMigrate(&RoutableKeyWord{})
+	kwdb.AutoMigrate(&RouteToKeyWord{})
+	kwdb.AutoMigrate(&RouteToHost{})
 }
 
 func get_db() *gorm.DB {

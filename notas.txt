@@ -22,3 +22,11 @@ db.AutoMigrate(&RoutableKeyWord{})
 
 
 "http://localhost:9900/ok"
+
+
+INSERT INTO routable_key_words
+VALUES (value1,value2,value3,...);
+
+
+INSERT INTO routable_key_words (created_at, key_word, destiny_route_string)
+VALUES (NOW(),"televisor_smart_philips","https://www.garbarino.com/productos?q=televisor+smart+philips");
