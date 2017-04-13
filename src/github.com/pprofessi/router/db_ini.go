@@ -6,18 +6,17 @@ import (
 	"github.com/pprofessi/config"
 )
 
+type RouteToHost struct {
+	gorm.Model
+	SourceHost      string
+	DestinyHost     string
+	RouteToKeyWords []RouteToKeyWord
+}
+
 type RouteToKeyWord struct {
 	gorm.Model
 	KeyWord         string
 	DestinyRouteUri string
-}
-
-type RouteToHost struct {
-	gorm.Model
-	SourceScheme  string
-	SourceHost    string
-	DestinyScheme string
-	DestinyHost   string
 }
 
 var kwdb *gorm.DB = nil

@@ -1,0 +1,13 @@
+seeder
+
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...);
+
+
+https://www.garbarino.com
+http://www.fravega.com
+http://www.musimundo.com
+http://www.falabella.com.ar
