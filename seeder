@@ -7,7 +7,14 @@ INSERT INTO table_name
 VALUES (value1, value2, value3, ...);
 
 
-https://www.garbarino.com
-http://www.fravega.com
-http://www.musimundo.com
-http://www.falabella.com.ar
+INSERT INTO route_to_hosts (created_at, source_host, destiny_host)
+VALUES (NOW(), "localhost.localdomain:9999", "https://www.garbarino.com");
+
+INSERT INTO route_to_hosts (created_at, source_host, destiny_host)
+VALUES (NOW(), "localhost:9999", "http://www.fravega.com");
+
+INSERT INTO route_to_hosts (created_at, source_host, destiny_host)
+VALUES (NOW(), "127.0.0.1:9999", "http://www.musimundo.com");
+
+INSERT INTO route_to_hosts (created_at, source_host, destiny_host)
+VALUES (NOW(), "0.0.0.0:9999", "http://www.falabella.com.ar");

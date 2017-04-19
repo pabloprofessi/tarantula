@@ -8,15 +8,16 @@ import (
 
 type RouteToHost struct {
 	gorm.Model
-	SourceHost      string
-	DestinyHost     string
-	RouteToKeyWords []RouteToKeyWord
+	SourceHost  string
+	DestinyHost string
+	RouteToUris []RouteToUri
 }
 
-type RouteToKeyWord struct {
+type RouteToUri struct {
 	gorm.Model
-	KeyWord         string
-	DestinyRouteUri string
+	SourceUri     string
+	DestinyUri    string
+	RouteToHostID uint
 }
 
 var kwdb *gorm.DB = nil
@@ -28,8 +29,8 @@ func db_init() {
 		config.LOG.Errorf("Failed to connect to database, err: %s", err)
 	}
 
-	kwdb.AutoMigrate(&RouteToKeyWord{})
 	kwdb.AutoMigrate(&RouteToHost{})
+	kwdb.AutoMigrate(&RouteToUri{})
 }
 
 func get_db() *gorm.DB {
