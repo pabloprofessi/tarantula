@@ -18,3 +18,13 @@ VALUES (NOW(), "127.0.0.1:9999", "http://www.musimundo.com");
 
 INSERT INTO route_to_hosts (created_at, source_host, destiny_host)
 VALUES (NOW(), "0.0.0.0:9999", "http://www.falabella.com.ar");
+
+
+
+
+INSERT INTO route_to_uris (created_at, source_uri, destiny_uri, route_to_host_id )
+VALUES (NOW(), "/query1" , "/", 2 );
+INSERT INTO route_to_uris (created_at, source_uri, destiny_uri, route_to_host_id )
+VALUES (NOW(), "/query2" , "/", 2 );
+INSERT INTO route_to_uris (created_at, source_uri, destiny_uri, route_to_host_id )
+VALUES (NOW(), "/query3" , "/q/tv/srch?q=tv", 2 );

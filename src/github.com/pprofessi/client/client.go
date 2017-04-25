@@ -5,7 +5,6 @@ import (
 	"github.com/pprofessi/config"
 	"io"
 	"net/http"
-	"net/url"
 	"time"
 	//"reflect"
 )
@@ -25,24 +24,16 @@ var client = &http.Client{Transport: tr,
 
 func ClientBackendRequester(w http.ResponseWriter, r *http.Request) {
 
-	destinyRouteURL, err := url.Parse("http://www.garbarino.com")
-	if err != nil {
-		config.LOG.Errorf("failed parse destinyRouteString")
-		config.LOG.Errorf("Error: %s", err)
-	}
-	r.URL = destinyRouteURL
-	r.Host = destinyRouteURL.Host
-	r.RequestURI = ""
-
 	res, err := client.Do(r)
-	config.LOG.Debugf("BE response: %#v", res)
+	//config.LOG.Debugf("BE response: %#v", res)
 	if err != nil {
 		config.LOG.Errorf("failed to send request to BE")
 		config.LOG.Errorf("Writing response error: %s", err)
 	}
 	defer res.Body.Close()
+	config.LOG.Debugf("HEADERS:\n")
 	for k, v := range res.Header {
-		config.LOG.Debugf("header %s", v)
+		config.LOG.Debugf("%s : %s", k, v)
 		w.Header()[k] = v
 	}
 	w.WriteHeader(res.StatusCode)
