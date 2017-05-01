@@ -3,8 +3,4 @@ tarantula:
   command: server
   ports:
     - "9999:9999"
-  volumes:
-    - ./:/app/tarantula
-  environment:
-    TARANTULA_CONF: /app/tarantula/tarantula_config_toml.conf
 

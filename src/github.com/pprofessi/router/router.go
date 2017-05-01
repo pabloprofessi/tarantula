@@ -22,7 +22,7 @@ func Router(w http.ResponseWriter, r *http.Request) {
 
 	if route_to_host.DestinyHost != "" {
 		route_to_uri := redirectableUri(route_to_host, r.URL.String())
-		if route_to_uri.DestinyU != "" {
+		if route_to_uri.DestinyUri != "" {
 
 			final_url_raw := route_to_host.DestinyHost
 			final_url_raw = final_url_raw + route_to_uri.DestinyUri
