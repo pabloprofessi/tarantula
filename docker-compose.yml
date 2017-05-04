@@ -2,19 +2,7 @@ tarantula:
   build: .
   command: server
   ports:
-    - "9999:9999"
-  volumes:
-    - ./:/app/tarantula
-  links:
-    - db:db
+    - "80:80"
   environment:
     TARANTULA_CONF: /app/tarantula/tarantula_config_toml.conf
-
-db:
-  image: mysql:5.7
-  environment:
-    MYSQL_ROOT_PASSWORD: tarantula
-    MYSQL_DATABASE: tarantula
-    MYSQL_USER: tarantula
-    MYSQL_PASSWORD: tarantula
 
