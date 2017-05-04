@@ -12,6 +12,8 @@ type ConfigType struct {
 	LogLevel          string
 	LogFormat         string
 	DbConectionString string
+	FromDomain        string
+	ToDomain          string
 }
 
 var Config ConfigType
