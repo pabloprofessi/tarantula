@@ -3,6 +3,3 @@ tarantula:
   command: server
   ports:
     - "80:80"
-  environment:
-    TARANTULA_CONF: /app/tarantula/tarantula_config_toml.conf
-

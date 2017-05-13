@@ -18,9 +18,7 @@ func Router(w http.ResponseWriter, r *http.Request) {
 	redirectableResult := redirectableUri(r.URL.Path[1:])
 	//&& (r.Host == config.Config.ToDomain)
 	if redirectableResult != "" {
-
 		final_url_raw := "https://" + config.Config.ToDomain + "/" + redirectableResult
-
 		destinyRouteURL, err := url.Parse(final_url_raw)
 		if err != nil {
 			config.LOG.Errorf("failed parse destinyRouteString")
