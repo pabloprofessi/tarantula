@@ -18,7 +18,7 @@ func main() {
 	mux.Handle("/", proxy_handler)
 
 	s := &http.Server{
-		Addr:    "0.0.0.0:9999",
+		Addr:    "0.0.0.0:80",
 		Handler: proxy_handler,
 	}
 

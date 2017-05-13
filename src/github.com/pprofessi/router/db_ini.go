@@ -1,42 +1,28 @@
 package router
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/pprofessi/config"
+	//º"fmt"
 )
 
-type RouteToHost struct {
-	gorm.Model
-	SourceHost  string
-	DestinyHost string
-	RouteToUris []RouteToUri
-}
-
-type RouteToUri struct {
-	gorm.Model
-	SourceUri     string
-	DestinyUri    string
-	RouteToHostID uint
-}
-
-var kwdb *gorm.DB = nil
+var urlsdb *sql.DB
 
 func db_init() {
 	var err error
-	kwdb, err = gorm.Open("mysql", config.Config.DbConectionString)
+	urlsdb, err = sql.Open("mysql", config.Config.DbConectionString)
+
 	if err != nil {
 		config.LOG.Errorf("Failed to connect to database, err: %s", err)
 	}
 
-	kwdb.AutoMigrate(&RouteToHost{})
-	kwdb.AutoMigrate(&RouteToUri{})
 }
 
-func get_db() *gorm.DB {
-	if kwdb == nil {
+func get_db() *sql.DB {
+	if urlsdb == nil {
 		db_init()
 		config.LOG.Debugf("Gorm DB initialized!")
 	}
-	return kwdb
+	return urlsdb
 }

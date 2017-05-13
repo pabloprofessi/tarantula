@@ -2,5 +2,4 @@ tarantula:
   build: .
   command: server
   ports:
-    - "9999:9999"
-
+    - "80:80"
