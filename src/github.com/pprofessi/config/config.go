@@ -7,7 +7,6 @@ import (
 )
 
 type ConfigType struct {
-	ProxyDNS          string
 	LogOutputPath     string
 	LogLevel          string
 	LogFormat         string
@@ -19,10 +18,18 @@ type ConfigType struct {
 var Config ConfigType
 
 func init() {
-	if _, err := toml.DecodeFile(os.Getenv("TARANTULA_CONF"), &Config); err != nil {
+	conf_path := "/app/tarantula/config/tarantula_config_dev.conf"
+
+	if os.Getenv("ENV") == "prod" {
+		conf_path = "/app/tarantula/config/tarantula_config_prod.conf"
+	}
+	_, err := toml.DecodeFile(conf_path, &Config)
+
+	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
 	Set_logger()
 
 	return

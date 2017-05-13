@@ -1,7 +1,5 @@
 export ROOT_DIR=${PWD}
 
-build:
-	go install github.com/pprofessi/server/
 
 run:
 	docker-compose up

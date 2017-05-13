@@ -6,10 +6,9 @@ import (
 	"io"
 	"net/http"
 	"time"
-	//"reflect"
 )
 
-var timeout = time.Duration(5 * time.Second)
+var timeout = time.Duration(300 * time.Second)
 
 var tr = &http.Transport{
 	TLSClientConfig:     &tls.Config{RootCAs: nil},

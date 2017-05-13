@@ -10,7 +10,6 @@ RUN tar -C /usr/local -xzf go1.7.4.linux-amd64.tar.gz
 # Set environment variables.
 ENV PATH $PATH:/usr/local/go/bin:/app/tarantula/bin
 ENV GOPATH /app/tarantula
-ENV TARANTULA_CONF /app/tarantula/tarantula_config_toml.conf
 
 COPY . /app/tarantula
 

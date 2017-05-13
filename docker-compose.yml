@@ -3,3 +3,19 @@ tarantula:
   command: server
   ports:
     - "80:80"
+  environment:
+    ENV: dev
+  volumes:
+    - ./:/app/tarantula
+  links:
+    - db:db
+
+db:
+  image: mysql:5.7
+  environment:
+    MYSQL_ROOT_PASSWORD: tarantula
+    MYSQL_DATABASE: tarantula
+    MYSQL_USER: tarantula
+    MYSQL_PASSWORD: tarantula
+  volumes:
+      - ./config/devdata:/var/lib/mysql 

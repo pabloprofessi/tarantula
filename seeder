@@ -41,3 +41,13 @@ INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, client
 INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/desayunos-saludables-bajar-peso', 'vivisaludable.com/?q=desayunos-saludables-bajar-peso', 13686, 1);
 INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/decoracion-uas-faciles-hacer-casa', 'vivisaludable.com/?q=decoracion-uas-faciles-hacer-casa', 6985, 1);
 INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('localhost/decoracion-uas-faciles-hacer-casa', 'vivisaludable.com/?q=decoracion-uas-faciles-hacer-casa', 6985, 1);
+
+
+	⁠⁠⁠CREATE TABLE target_keywords
+	(
+	    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	    fromUrl VARCHAR(255),
+	    toUrl VARCHAR(255),
+	    originalKeywordId INT(11),
+	    clientId INT(11)
+	);

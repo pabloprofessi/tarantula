@@ -9,16 +9,19 @@ import (
 )
 
 func Router(w http.ResponseWriter, r *http.Request) {
-	config.LOG.Debugf("r.URL.String(): %s", r.URL.String())
-	config.LOG.Debugf("r.URL.Path[1:]: %s", r.URL.Path[1:])
-	//config.LOG.Debugf("r.URL.Scheme: %s", r.URL.Scheme) no mustra nada, no se q onda
-	config.LOG.Debugf("r.Host:  %s", r.Host)
-	config.LOG.Debugf("r.RequestURI:  %s", r.RequestURI)
+	config.LOG.Infof("host to be proxied:  %s", r.Host)
+	config.LOG.Infof("path recieved to be evaluated: %s", r.URL.String())
 
-	redirectableResult := redirectableUri(r.URL.Path[1:])
+	if r.URL.Path[1:] == "ping" {
+		response_writer.Response_writer(w, "pong")
+		return
+	}
+	redirectableResult := redirectableUri(r.Host + r.URL.Path)
 	//&& (r.Host == config.Config.ToDomain)
+
 	if redirectableResult != "" {
-		final_url_raw := "https://" + config.Config.ToDomain + "/" + redirectableResult
+		//final_url_raw := "https://" + config.Config.ToDomain + "/" + redirectableResult
+		final_url_raw := "https://" + redirectableResult
 		destinyRouteURL, err := url.Parse(final_url_raw)
 		if err != nil {
 			config.LOG.Errorf("failed parse destinyRouteString")
@@ -31,7 +34,7 @@ func Router(w http.ResponseWriter, r *http.Request) {
 		client.ClientBackendRequester(w, r)
 
 	} else {
-		response_writer.Response_writer(w)
+		response_writer.Response_writer(w, "Source not found!\n")
 	}
 
 }

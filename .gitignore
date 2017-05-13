@@ -5,3 +5,4 @@ tarantula_config_toml.conf
 src/github.com/BurntSushi/
 src/github.com/op/
 src/github.com/jinzhu/
+config/devdata/*
