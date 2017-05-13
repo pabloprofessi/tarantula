@@ -16,12 +16,13 @@ func Router(w http.ResponseWriter, r *http.Request) {
 		response_writer.Response_writer(w, "pong")
 		return
 	}
-	redirectableResult := redirectableUri(r.Host + r.URL.Path)
+	//redirectableResult := redirectableUri(r.Host + r.URL.Path)
+	redirectableResult := redirectableUri(r.URL.Path[1:])
 	//&& (r.Host == config.Config.ToDomain)
 
 	if redirectableResult != "" {
-		//final_url_raw := "https://" + config.Config.ToDomain + "/" + redirectableResult
-		final_url_raw := "https://" + redirectableResult
+		final_url_raw := "https://" + config.Config.ToDomain + "/" + redirectableResult
+		//final_url_raw := "https://" + redirectableResult
 		destinyRouteURL, err := url.Parse(final_url_raw)
 		if err != nil {
 			config.LOG.Errorf("failed parse destinyRouteString")

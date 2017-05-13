@@ -20,3 +20,5 @@ bash:
 db:
 	mysql -u tarantula -h 172.17.0.2 -ptarantula tarantula
 
+runprod:
+	docker run -p 8080:8080 -e "ENV=prod" taramtula-proxy-prod 
