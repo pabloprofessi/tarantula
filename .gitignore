@@ -6,3 +6,6 @@ src/github.com/BurntSushi/
 src/github.com/op/
 src/github.com/jinzhu/
 config/devdata/*
+src/github.com/gorilla/
+src/github.com/newrelic/
+

@@ -1,0 +1,83 @@
+Parameters:
+  VPC:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC
+  Subnets:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: Subnets
+  InstanceType:
+    Type: String
+    Description: Flavor
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: SSH Key
+  InstanceSecurityGroups:
+    Type: List<AWS::EC2::SecurityGroup::Id>
+    Description: Security Groups
+  ELBSecurityGroups:
+    Type: List<AWS::EC2::SecurityGroup::Id>
+    Description: Security Groups
+
+Resources:
+  InstanceProxyLaunchConfiguration:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      UserData:
+        "Fn::Base64":
+          !Sub |
+           #!/bin/bash
+           echo "hola pablo" > /tmp/testlc
+           bash /home/ec2-user/start.sh
+      AssociatePublicIpAddress: true
+      ImageId: ami-5bd4984d
+      InstanceType:
+        Ref: InstanceType
+      SecurityGroups:
+        Ref: InstanceSecurityGroups
+      KeyName:
+        Ref: KeyName
+
+  InstanceProxyAutoscalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      LoadBalancerNames: 
+      - Ref: InstanceProxyElasticLoadBalancer
+      LaunchConfigurationName:
+        Ref: InstanceProxyLaunchConfiguration
+      MinSize: '2'
+      MaxSize: '3'
+      VPCZoneIdentifier:
+        Ref: Subnets
+      Tags:
+      - Key: Name
+        Value: tarantula-proxy
+        PropagateAtLaunch: true
+
+  InstanceProxyElasticLoadBalancer:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    Properties: 
+      LoadBalancerName: tarantula-proxy
+      Scheme: internet-facing
+      Subnets:
+        Ref: Subnets
+      SecurityGroups:
+        Ref: ELBSecurityGroups
+      ConnectionDrainingPolicy:
+        Enabled: true
+        Timeout: 300
+      Listeners:
+      - LoadBalancerPort: 80
+        InstancePort: 8080
+        Protocol: HTTP
+        InstanceProtocol: HTTP
+      HealthCheck: 
+        Target: HTTP:8080/ping
+        HealthyThreshold: 2
+        UnhealthyThreshold: 2
+        Interval: 5
+        Timeout: 4
+      Tags:
+      - Key: Name
+        Value: tarantula-proxy
+
+
