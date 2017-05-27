@@ -17,6 +17,13 @@ Parameters:
   ELBSecurityGroups:
     Type: List<AWS::EC2::SecurityGroup::Id>
     Description: Security Groups
+  SSLCertificate:
+    Type: String
+    Description: SSL Certificate to allow https connection from tarantula-group.me 
+  AmiId:
+    Type: String
+    Description: ID of ami that will be used
+
 
 Resources:
   InstanceProxyLaunchConfiguration:
@@ -26,10 +33,12 @@ Resources:
         "Fn::Base64":
           !Sub |
            #!/bin/bash
-           echo "hola pablo" > /tmp/testlc
            bash /home/ec2-user/start.sh
+           docker pull pabloncio/tarantula-proxy-prod
+           nohup docker run -p 8080:8080 -e "ENV=prod" pabloncio/tarantula-proxy-prod > /var/log/tarantula.log &
       AssociatePublicIpAddress: true
-      ImageId: ami-5bd4984d
+      ImageId: 
+        Ref: AmiId
       InstanceType:
         Ref: InstanceType
       SecurityGroups:
@@ -70,6 +79,11 @@ Resources:
         InstancePort: 8080
         Protocol: HTTP
         InstanceProtocol: HTTP
+      - LoadBalancerPort: 443
+        InstancePort: 8080
+        Protocol: HTTPS
+        SSLCertificateId : 
+          Ref: SSLCertificate
       HealthCheck: 
         Target: HTTP:8080/ping
         HealthyThreshold: 2
