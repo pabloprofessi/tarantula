@@ -53,8 +53,8 @@ Resources:
       - Ref: InstanceProxyElasticLoadBalancer
       LaunchConfigurationName:
         Ref: InstanceProxyLaunchConfiguration
-      MinSize: '2'
-      MaxSize: '3'
+      MinSize: '1'
+      MaxSize: '1'
       VPCZoneIdentifier:
         Ref: Subnets
       Tags:

@@ -1,11 +1,8 @@
-FROM ubuntu:14.04
+FROM golang:1.7-alpine 
 
-RUN apt-get update
-
-RUN  apt-get install -y wget git
-
-RUN wget https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz
-RUN tar -C /usr/local -xzf go1.7.4.linux-amd64.tar.gz
+RUN apk update
+RUN apk upgrade
+RUN apk add bash curl git wget
 
 # Set environment variables.
 ENV PATH $PATH:/usr/local/go/bin:/app/tarantula/bin
