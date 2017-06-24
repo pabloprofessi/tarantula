@@ -5,14 +5,14 @@ RUN apk upgrade
 RUN apk add bash curl git wget
 
 # Set environment variables.
-ENV PATH $PATH:/usr/local/go/bin:/app/tarantula/bin
-ENV GOPATH /app/tarantula
+ENV PATH $PATH:/app/bin
+ENV GOPATH /app
 
-COPY . /app/tarantula
+RUN mkdir -p /app/src/github.com/tarantula
+COPY . /app/src/github.com/tarantula
 
-WORKDIR /app/tarantula/src/github.com/pprofessi/server
+WORKDIR /app/src/github.com/tarantula
 
-RUN go get
 RUN go install
 
-CMD ["server"]
+CMD ["start"]

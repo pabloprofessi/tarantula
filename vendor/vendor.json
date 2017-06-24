@@ -1,0 +1,25 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "Pc2ORQp+VY3Un/dkh4QwLC7R6lE=",
+			"path": "github.com/BurntSushi/toml",
+			"revision": "8b58b6030fce084b58a61e2bc3fdf183d5881ab4",
+			"revisionTime": "2017-06-23T23:49:09Z"
+		},
+		{
+			"checksumSHA1": "Yi7+P8UCCOlHzzpWEN0U2nlGvz0=",
+			"path": "github.com/go-sql-driver/mysql",
+			"revision": "8fefef06da7707b5a3cda42195a6b409c9c9ab5c",
+			"revisionTime": "2017-06-16T13:16:31Z"
+		},
+		{
+			"checksumSHA1": "BoXdUBWB8UnSlFlbnuTQaPqfCGk=",
+			"path": "github.com/op/go-logging",
+			"revision": "970db520ece77730c7e4724c61121037378659d9",
+			"revisionTime": "2016-03-15T20:05:05Z"
+		}
+	],
+	"rootPath": "github.com/tarantula"
+}

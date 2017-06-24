@@ -1,12 +1,13 @@
 tarantula:
   build: .
-  command: server
+  command: go run /app/src/github.com/tarantula/start.go
   ports:
-    - "80:80"
+    - "8080:8080"
+    - "8081:8081"
   environment:
     ENV: dev
   volumes:
-    - ./:/app/tarantula
+    - /home/pprofessi/projects/go/src/github.com/tarantula:/app/src/github.com/tarantula
   links:
     - db:db
 
