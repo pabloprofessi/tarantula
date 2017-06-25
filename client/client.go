@@ -2,6 +2,7 @@ package client
 
 import (
 	"bytes"
+	"compress/gzip"
 	"crypto/tls"
 	"github.com/tarantula/config"
 	"io"
@@ -34,15 +35,37 @@ func ClientBackendRequester(w http.ResponseWriter, r *http.Request) {
 		config.LOG.Errorf("Writing response error: %s", err)
 	}
 	defer res.Body.Close()
-	for k, v := range res.Header {
-		//config.LOG.Debugf("%s : %s", k, v)
-		w.Header()[k] = v
-	}
+
+	var body []byte
+
 	w.WriteHeader(res.StatusCode)
-	body, _ := ioutil.ReadAll(res.Body)
-	body_replaced := bytes.Replace(body, []byte(`<meta name="robots" content="noindex,follow"/>`), []byte(``), -1)
-	//config.LOG.Debugf("body_replaced: %s", body_replaced)
-	buf := bytes.NewBuffer(body_replaced)
+	if res.Header.Get("Content-Encoding") == "gzip" {
+		reader, err := gzip.NewReader(res.Body)
+		if err != nil {
+			config.LOG.Errorf("reading body to be gziped replaced")
+			config.LOG.Errorf("Error: %s", err)
+		}
+		body, err = ioutil.ReadAll(reader)
+	} else {
+		body, err = ioutil.ReadAll(res.Body)
+	}
+
+	if err != nil {
+		config.LOG.Errorf("error casting body to byte[]")
+		config.LOG.Errorf("Error: %s", err)
+	}
+	//config.LOG.Debugf("body: %s", body)
+	body = bytes.Replace(body, []byte(`<meta name="robots" content="noindex,follow"/>`), []byte(""), -1)
+	//config.LOG.Debugf("body_replaced: %s", body)
+	buf := bytes.NewBuffer(body)
+
+	for k, v := range res.Header {
+		if (k != "Accept-Encoding") && (k != "Content-Encoding") {
+			w.Header()[k] = v
+			config.LOG.Debugf("REWIRTED headers %s : %s", k, v)
+		}
+
+	}
 	io.Copy(w, buf)
 	return
 }

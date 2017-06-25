@@ -2,7 +2,7 @@ package config
 
 import (
 	"github.com/op/go-logging"
-	"io/ioutil"
+	//"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
@@ -28,13 +28,13 @@ func PrettyRequestLoger(r *http.Request, prefix string) {
 	headers_line := ""
 
 	for k, v := range r.Header {
-		headers_line = "[ " + k + " : " + strings.Join(v[:], ",") + " ]"
+		headers_line = "[ " + k + " : " + strings.Join(v[:], ",") + " ]" + headers_line
 	}
 
 	LOG.Infof("%s > RemoteAddr: %s, URL: %s, Proto: %s", prefix, r.RemoteAddr, r.URL, r.Proto)
 	LOG.Infof("%s > HEADERS : %s", prefix, headers_line)
-	body, _ := ioutil.ReadAll(r.Body)
-	LOG.Infof("%s > BODY: %s", prefix, body)
+	//body, _ := ioutil.ReadAll(r.Body)
+	//LOG.Infof("%s > BODY: %s", prefix, body)
 
 }
 
@@ -43,11 +43,12 @@ func PrettyResponseLoger(r *http.Response, prefix string) {
 	headers_line := ""
 
 	for k, v := range r.Header {
-		headers_line = "[ " + k + " : " + strings.Join(v[:], ",") + " ]"
+		headers_line = "[ " + k + " : " + strings.Join(v[:], ",") + " ]" + headers_line
 	}
-
 	LOG.Infof("%s > Status: %s, Proto: %s", prefix, r.Status, r.Proto)
 	LOG.Infof("%s > HEADERS : %s", prefix, headers_line)
+	//body, _ := ioutil.ReadAll(r.Body)
+	//LOG.Infof("%s > BODY: %s", prefix, body)
 
 }
 
