@@ -17,6 +17,8 @@ func redirect(w http.ResponseWriter, r *http.Request) {
 	if len(r.URL.RawQuery) > 0 {
 		target += "?" + r.URL.RawQuery
 	}
+	http.Redirect(w, r, target, http.StatusPermanentRedirect)
+	config.LOG.Debugf("redirected!")
 }
 
 func InitServer() {

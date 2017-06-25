@@ -31,10 +31,23 @@ func PrettyRequestLoger(r *http.Request, prefix string) {
 		headers_line = "[ " + k + " : " + strings.Join(v[:], ",") + " ]"
 	}
 
-	LOG.Debugf("%s > RemoteAddr: %s, URL: %s, Proto: %s", prefix, r.RemoteAddr, r.URL, r.Proto)
-	LOG.Debugf("%s > HEADERS : %s", prefix, headers_line)
+	LOG.Infof("%s > RemoteAddr: %s, URL: %s, Proto: %s", prefix, r.RemoteAddr, r.URL, r.Proto)
+	LOG.Infof("%s > HEADERS : %s", prefix, headers_line)
 	body, _ := ioutil.ReadAll(r.Body)
-	LOG.Debugf("%s > BODY: %s", prefix, body)
+	LOG.Infof("%s > BODY: %s", prefix, body)
+
+}
+
+func PrettyResponseLoger(r *http.Response, prefix string) {
+
+	headers_line := ""
+
+	for k, v := range r.Header {
+		headers_line = "[ " + k + " : " + strings.Join(v[:], ",") + " ]"
+	}
+
+	LOG.Infof("%s > Status: %s, Proto: %s", prefix, r.Status, r.Proto)
+	LOG.Infof("%s > HEADERS : %s", prefix, headers_line)
 
 }
 

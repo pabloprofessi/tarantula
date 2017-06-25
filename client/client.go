@@ -25,7 +25,9 @@ var client = &http.Client{Transport: tr,
 
 func ClientBackendRequester(w http.ResponseWriter, r *http.Request) {
 
+	config.PrettyRequestLoger(r, "cli request")
 	res, err := client.Do(r)
+	config.PrettyResponseLoger(res, "cli response")
 	//config.LOG.Debugf("BE response: %#v", res)
 	if err != nil {
 		config.LOG.Errorf("failed to send request to BE")
@@ -36,11 +38,11 @@ func ClientBackendRequester(w http.ResponseWriter, r *http.Request) {
 		//config.LOG.Debugf("%s : %s", k, v)
 		w.Header()[k] = v
 	}
-	config.PrettyRequestLoger(r, "cli request")
 	w.WriteHeader(res.StatusCode)
 	body, _ := ioutil.ReadAll(res.Body)
-	body = bytes.Replace(body, []byte(`<meta name="robots" content="noindex,follow"/>`), []byte(""), -1)
-	buf := bytes.NewBuffer(body)
+	body_replaced := bytes.Replace(body, []byte(`<meta name="robots" content="noindex,follow"/>`), []byte(``), -1)
+	//config.LOG.Debugf("body_replaced: %s", body_replaced)
+	buf := bytes.NewBuffer(body_replaced)
 	io.Copy(w, buf)
 	return
 }

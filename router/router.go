@@ -11,7 +11,7 @@ import (
 func Router(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path[1:] == "ping" {
-		response_writer.Response_writer(w, "pong")
+		response_writer.Response_writer(w, "pong", r)
 		return
 	}
 	config.PrettyRequestLoger(r, "server request")
@@ -36,7 +36,7 @@ func Router(w http.ResponseWriter, r *http.Request) {
 		client.ClientBackendRequester(w, r)
 
 	} else {
-		response_writer.Response_writer(w, "Source not found!\n")
+		response_writer.Response_writer(w, r.URL.Path[1:], r)
 	}
 
 }
@@ -50,11 +50,13 @@ func redirectableUri(fromUrl string) string {
 	stmt, err := urlsdb.Prepare("SELECT toUrl FROM target_keywords where fromUrl=? LIMIT 1")
 	if err != nil {
 		config.LOG.Errorf("Error preparing query redirectableUri: %s", err)
+		return ""
 	}
 
 	err = stmt.QueryRow(fromUrl).Scan(&toUrl)
 	if err != nil {
-		config.LOG.Errorf("Error quering toUrl: %s", err)
+		config.LOG.Warning("Error quering toUrl: %s", err)
+		return ""
 	}
 
 	config.LOG.Debugf("Route to host obtained from DB query: %s", toUrl)
