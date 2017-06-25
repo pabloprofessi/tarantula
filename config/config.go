@@ -21,7 +21,7 @@ func init() {
 	conf_path := "/app/src/github.com/tarantula/config/files/tarantula_config_dev.conf"
 
 	if os.Getenv("ENV") == "prod" {
-		conf_path = os.Getenv("GOPATH") + "/app/src/github.com/tarantula/config/files/tarantula_config_prod.conf"
+		conf_path = os.Getenv("GOPATH") + "/src/github.com/tarantula/config/files/tarantula_config_prod.conf"
 	}
 	_, err := toml.DecodeFile(conf_path, &Config)
 

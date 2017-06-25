@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/tarantula/config"
 	"github.com/tarantula/router"
 	"net/http"
 )
