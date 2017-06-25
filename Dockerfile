@@ -15,4 +15,4 @@ WORKDIR /app/src/github.com/tarantula
 
 RUN go install
 
-CMD ["start"]
+CMD ["tarantula"]

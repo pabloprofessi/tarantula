@@ -30,24 +30,24 @@ INSERT INTO route_to_uris (created_at, source_uri, destiny_uri, route_to_host_id
 VALUES (NOW(), "/query3" , "/q/tv/srch?q=tv", 2 );
 
 
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/fortalecer-los-brazos', 'vivisaludable.com/?q=fortalecer-los-brazos', 15099, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/desayunar-no-engordar', 'vivisaludable.com/?q=desayunar-no-engordar', 13670, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/formas-bajar-peso-rapido-mujeres', 'vivisaludable.com/?q=formas-bajar-peso-rapido-mujeres', 4942, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/feliz-vida', 'vivisaludable.com/?q=feliz-vida', 15189, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/cmo-pintarse-las-uas', 'vivisaludable.com/?q=cmo-pintarse-las-uas', 5813, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/diseos-uas-faciles-hacer-casa', 'vivisaludable.com/?q=diseos-uas-faciles-hacer-casa', 8884, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/diseos-pintar-las-uas', 'vivisaludable.com/?q=diseos-pintar-las-uas', 7235, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/pintarse-las-uas-paso-paso', 'vivisaludable.com/?q=pintarse-las-uas-paso-paso', 6008, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/desayunos-saludables-bajar-peso', 'vivisaludable.com/?q=desayunos-saludables-bajar-peso', 13686, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('articulos.vivisaludable.com/decoracion-uas-faciles-hacer-casa', 'vivisaludable.com/?q=decoracion-uas-faciles-hacer-casa', 6985, 1);
-INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('localhost/decoracion-uas-faciles-hacer-casa', 'vivisaludable.com/?q=decoracion-uas-faciles-hacer-casa', 6985, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('fortalecer-los-brazos', '?q=fortalecer-los-brazos', 15099, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('desayunar-no-engordar', '?q=desayunar-no-engordar', 13670, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('formas-bajar-peso-rapido-mujeres', '?q=formas-bajar-peso-rapido-mujeres', 4942, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('feliz-vida', '?q=feliz-vida', 15189, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('cmo-pintarse-las-uas', '?q=cmo-pintarse-las-uas', 5813, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('diseos-uas-faciles-hacer-casa', '?q=diseos-uas-faciles-hacer-casa', 8884, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('diseos-pintar-las-uas', '?q=diseos-pintar-las-uas', 7235, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('pintarse-las-uas-paso-paso', '?q=pintarse-las-uas-paso-paso', 6008, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('desayunos-saludables-bajar-peso', '?q=desayunos-saludables-bajar-peso', 13686, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('decoracion-uas-faciles-hacer-casa', '?q=decoracion-uas-faciles-hacer-casa', 6985, 1);
+INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('localhost/decoracion-uas-faciles-hacer-casa', '?q=decoracion-uas-faciles-hacer-casa', 6985, 1);
 
 
-	⁠⁠⁠CREATE TABLE target_keywords
-	(
-	    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	    fromUrl VARCHAR(255),
-	    toUrl VARCHAR(255),
-	    originalKeywordId INT(11),
-	    clientId INT(11)
-	);
+	CREATE TABLE target_keywords
+(
+    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    fromUrl VARCHAR(255),
+    toUrl VARCHAR(255),
+    originalKeywordId INT(11),
+    clientId INT(11)
+);

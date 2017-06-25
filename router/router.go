@@ -14,9 +14,9 @@ func Router(w http.ResponseWriter, r *http.Request) {
 		response_writer.Response_writer(w, "pong")
 		return
 	}
-
-	config.LOG.Infof("host to be proxied:  %s", r.Host)
-	config.LOG.Infof("path recieved to be evaluated: %s", r.URL.String())
+	config.PrettyRequestLoger(r, "server request")
+	//config.LOG.Infof("host to be proxied:  %s", r.Host)
+	//config.LOG.Infof("path recieved to be evaluated: %s", r.URL.String())
 	//redirectableResult := redirectableUri(r.Host + r.URL.Path)
 	redirectableResult := redirectableUri(r.URL.Path[1:])
 	//&& (r.Host == config.Config.ToDomain)

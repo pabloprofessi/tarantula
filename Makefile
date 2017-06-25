@@ -21,11 +21,11 @@ db:
 	mysql -u tarantula -h 172.17.0.2 -ptarantula tarantula
 
 runprod:
-	nohup docker run -p 8080:8080 -e "ENV=prod" taramtula-proxy-prod > /var/log/tarantula.log &
+	nohup docker run -p 8080:8080 -p 8081:8081 -e "ENV=prod" taramtula-proxy-prod > /var/log/tarantula.log &
 
 push:
-	docker build -t tarantula-proxy-prod .
-	docker tag tarantula-proxy-prod pabloncio/tarantula-proxy-prod
-	docker push pabloncio/tarantula-proxy-prod
-	#docker pull pabloncio/tarantula-proxy-prod:latest
-	#nohup docker run -p 8080:8080 -e "ENV=prod" pabloncio/tarantula-proxy-prod > /var/log/tarantula.log &
+	docker build -t tarantula-proxy-prod2 .
+	docker tag tarantula-proxy-prod2 pabloncio/tarantula-proxy-prod2
+	docker push pabloncio/tarantula-proxy-prod2
+	#docker pull pabloncio/tarantula-proxy-prod2:latest
+	#nohup docker run -p 8080:8080 -p 8081:8081 -e "ENV=prod" pabloncio/tarantula-proxy-prod > /var/log/tarantula.log &

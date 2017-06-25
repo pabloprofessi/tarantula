@@ -1,13 +1,11 @@
 package server
 
 import (
-	"github.com/tarantula/config"
 	"github.com/tarantula/router"
 	"net/http"
 )
 
 func proxy(w http.ResponseWriter, r *http.Request) {
-
 	router.Router(w, r)
 
 }
@@ -18,8 +16,6 @@ func redirect(w http.ResponseWriter, r *http.Request) {
 	if len(r.URL.RawQuery) > 0 {
 		target += "?" + r.URL.RawQuery
 	}
-
-	http.Redirect(w, r, target, http.StatusTemporaryRedirect)
 }
 
 func InitServer() {

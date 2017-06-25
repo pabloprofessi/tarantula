@@ -76,7 +76,7 @@ Resources:
         Timeout: 300
       Listeners:
       - LoadBalancerPort: 80
-        InstancePort: 8080
+        InstancePort: 8081
         Protocol: HTTP
         InstanceProtocol: HTTP
       - LoadBalancerPort: 443

@@ -1,9 +1,11 @@
 package client
 
 import (
+	"bytes"
 	"crypto/tls"
 	"github.com/tarantula/config"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"time"
 )
@@ -30,12 +32,15 @@ func ClientBackendRequester(w http.ResponseWriter, r *http.Request) {
 		config.LOG.Errorf("Writing response error: %s", err)
 	}
 	defer res.Body.Close()
-	config.LOG.Debugf("HEADERS:\n")
 	for k, v := range res.Header {
-		config.LOG.Debugf("%s : %s", k, v)
+		//config.LOG.Debugf("%s : %s", k, v)
 		w.Header()[k] = v
 	}
+	config.PrettyRequestLoger(r, "cli request")
 	w.WriteHeader(res.StatusCode)
-	io.Copy(w, res.Body)
+	body, _ := ioutil.ReadAll(res.Body)
+	body = bytes.Replace(body, []byte(`<meta name="robots" content="noindex,follow"/>`), []byte(""), -1)
+	buf := bytes.NewBuffer(body)
+	io.Copy(w, buf)
 	return
 }
