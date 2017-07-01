@@ -15,16 +15,10 @@ func Router(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	config.PrettyRequestLoger(r, "server request")
-	//config.LOG.Infof("host to be proxied:  %s", r.Host)
-	//config.LOG.Infof("path recieved to be evaluated: %s", r.URL.String())
-	//redirectableResult := redirectableUri(r.Host + r.URL.Path)
 	redirectableResult := redirectableUri(r.URL.Path[1:])
-	//&& (r.Host == config.Config.ToDomain)
 
 	if redirectableResult != "" {
-		final_url_raw := "https://" + config.Config.ToDomain + "/" + redirectableResult
-		//final_url_raw := "https://" + redirectableResult
-		destinyRouteURL, err := url.Parse(final_url_raw)
+		destinyRouteURL, err := url.Parse(redirectableResult)
 		if err != nil {
 			config.LOG.Errorf("failed parse destinyRouteString")
 			config.LOG.Errorf("Error: %s", err)
@@ -41,7 +35,6 @@ func Router(w http.ResponseWriter, r *http.Request) {
 
 }
 
-//redireccion del host solamente sin uri
 func redirectableUri(fromUrl string) string {
 	var toUrl string
 
@@ -49,13 +42,13 @@ func redirectableUri(fromUrl string) string {
 
 	stmt, err := urlsdb.Prepare("SELECT toUrl FROM target_keywords where fromUrl=? LIMIT 1")
 	if err != nil {
-		config.LOG.Errorf("Error preparing query redirectableUri: %s", err)
+		config.LOG.Errorf("Error preparing query redirectableUri: ", err)
 		return ""
 	}
 
 	err = stmt.QueryRow(fromUrl).Scan(&toUrl)
 	if err != nil {
-		config.LOG.Warning("Error quering toUrl: %s", err)
+		config.LOG.Warning("Error quering toUrl: ", err)
 		return ""
 	}
 

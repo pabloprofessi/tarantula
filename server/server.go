@@ -22,7 +22,7 @@ func redirect(w http.ResponseWriter, r *http.Request) {
 }
 
 func InitServer() {
-
+	config.LOG.Debugf("redirected!")
 	mux := http.NewServeMux()
 	proxy_handler := http.HandlerFunc(proxy)
 	mux.Handle("/", proxy_handler)
@@ -32,6 +32,7 @@ func InitServer() {
 		Handler: proxy_handler,
 	}
 
+	config.LOG.Debugf("Listening...:proxy server")
 	go s.ListenAndServe()
 
 	redirect_mux := http.NewServeMux()
@@ -42,5 +43,7 @@ func InitServer() {
 		Addr:    "0.0.0.0:8081",
 		Handler: redirect_handler,
 	}
+
+	config.LOG.Debugf("Listening...:redirect server")
 	redirect_server.ListenAndServe()
 }

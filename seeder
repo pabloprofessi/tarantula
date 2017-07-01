@@ -51,3 +51,8 @@ INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, client
     originalKeywordId INT(11),
     clientId INT(11)
 );
+
+
+
+	INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('fortalecer-los-brazos', 'https://vivisaludable.com/?s=desayunar-no-engordar', 15099, 1);
+	INSERT INTO tarantula.target_keywords (fromUrl, toUrl, originalKeywordId, clientId) VALUES ('desayunar-no-engordar', 'https://vivisaludable.com/?s=desayunar-no-engordar', 13670, 1);

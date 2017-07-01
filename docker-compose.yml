@@ -5,11 +5,11 @@ tarantula:
     - "8080:8080"
     - "8081:8081"
   environment:
-    ENV: prod
+    ENV: dev
   volumes:
     - /home/pprofessi/projects/go/src/github.com/tarantula:/app/src/github.com/tarantula
-  #links:
-  #  - db:db
+  links:
+    - db:db
 
 db:
   image: mysql:5.7
